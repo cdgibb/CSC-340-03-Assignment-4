@@ -1,203 +1,221 @@
 ## API Endpoints
-Base URL: [`http://localhost:8080/students`](http://localhost:8080/students)
+Base URL: [`http://localhost:8080/animals`](http://localhost:8080/animals)
 
 
-### [`/all`](http://localhost:8080/students/all) (GET)
-Gets a list of all Students in the database.
+### [`/all`](http://localhost:8080/animals/all) (GET)
+Gets a list of all Animals in the database.
 
-#### Response - A JSON array of Student objects.
+#### Response - A JSON array of Animal objects.
 
  ```
 [
   {
-    "studentId": 1,
-    "name": "Alice Smith",
-    "major": "CSC",
-    "gpa": 3.88
+     "name": "bluejay",
+     "scientificName": "cyanocitta cristata",
+     "species": "bird",
+     "habitat": "forest",
+     "description": "a kind of bird"
   },
   {
-    "studentId": 2,
-    "name": "Bobby Stewart",
-    "major": "MAT",
-    "gpa": 2.97
+     "name": "robin",
+     "scientificName": "turdus migratorius",
+     "species": "bird",
+     "habitat": "forest",
+     "description": "another kind of bird"
   }
 ]
 ```
 
-### [`/{studentId}`](http://localhost:8080/students/1) (GET)
-Gets an individual Student in the system. Each Student is identified by a numeric `studentId`
+### [`/{animalId}`](http://localhost:8080/animals/1) (GET)
+Gets an individual Animal in the system. Each Animal is identified by a numeric `animalId`
 
 #### Parameters
-- Path Variable: `studentId` &lt;integer&gt; - REQUIRED
+- Path Variable: `animalId` &lt;integer&gt; - REQUIRED
 
-#### Response - A single Student
+#### Response - A single Animal
 
 ```
 {
-  "studentId": 1,
-  "name": "Alice Smith",
-  "major": "CSC",
-  "gpa": 3.88
-}
+     "name": "bluejay",
+     "scientificName": "cyanocitta cristata",
+     "species": "bird",
+     "habitat": "forest",
+     "description": "a kind of bird"
+  }
 ```
 
-### [`/name`](http://localhost:8080/students/name?search=ob) (GET)
-Gets a list of students with a name that contains the given string.
+### [`/namecontains`](http://localhost:8080/animals/namecontains?name=blue) (GET)
+Gets a list of animals with a name that contains the given string.
 
 #### Parameters
-- query parameter: `search` lt;String&gt; - REQUIRED
+- query parameter: `name` &lt;String&gt; - REQUIRED
 
-#### Response - A JSON array of Student objects.
+#### Response - A JSON array of Animal objects.
 
 ```
 [
   {
-    "studentId": 2,
-    "name": "Bobby Stewart",
-    "major": "MAT",
-    "gpa": 2.97
+    "animalId": 1,
+    "name": "bluejay",
+    "scientificName": "cyanocitta cristata",
+    "species": "bird",
+    "habitat": "forest",
+    "description": "a kind of bird"
   },
   {
-    "studentId": 5,
-    "name": "Jobadiah Evans",
-    "major": "REL",
-    "gpa": 3.46
+    "animalId": 5,
+    "name": "blue whale",
+    "scientificName": "balaenoptera musculus",
+    "species": "mammal",
+    "habitat": "oceans",
+    "description": "the largest known animal to have ever existed"
   }
 ]
 ```
 
-### [`/major/{major}`](http://localhost:8080/students/major/csc) (GET)
-Gets a list of students for a named major.
+### [`/species`](http://localhost:8080/animals/species?name=bird) (GET)
+Gets a list of animals for a named species.
 
 #### Parameters
-- path variable: `major` &lt;String&gt; - REQUIRED
+- query variable: `name` &lt;String&gt; - REQUIRED
 
-#### Response - A JSON array of Student objects.
+#### Response - A JSON array of Animal objects.
 
 ```
 [
   {
-    "studentId": 1,
-    "name": "Alice Smith",
-    "major": "CSC",
-    "gpa": 2.97
+    "animalId": 3,
+    "name": "meerkat",
+    "scientificName": "suricata suricatta",
+    "species": "mammal",
+    "habitat": "plains",
+    "description": "a moderately sized rodent that lives in large families"
   },
   {
-    "studentId": 7,
-    "name": "John Doe",
-    "major": "CSC",
-    "gpa": 3.65
+    "animalId": 5,
+    "name": "blue whale",
+    "scientificName": "balaenoptera musculus",
+    "species": "mammal",
+    "habitat": "oceans",
+    "description": "the largest known animal to have ever existed"
   }
 ]
 ```
 
-### [`/honors`](http://localhost:8080/students/honors?gpa=3.5) (GET)
-Gets a list of students with a GPA meeting the Threshold.
-
-#### Parameters
-- query parameter: `gpa` &lt;Double&gt; - REQUIRED
-
-#### Response - A JSON array of Student objects.
-
-```
-[
-  {
-    "studentId": 1,
-    "name": "Alice Smith",
-    "major": "CSC",
-    "gpa": 3.88
-  },
-  {
-    "studentId": 7,
-    "name": "John Doe",
-    "major": "CSC",
-    "gpa": 3.65
-  }
-]
-```
-
-### [`/new`](http://localhost:8080/students/new) (POST)
-Create  a new Student entry
+### [`/new`](http://localhost:8080/animals/new) (POST)
+Create a new Animal entry
  
 #### Request Body
-A student object. Note that the studentId is auto assigned in the database so is not needed in the request.
+An animal object. Note that the animalId is auto assigned in the database so is not needed in the request.
 ```
 {
-  "name": "Mister New Student",
-  "major": "CSC",
-  "gpa": 3.28
+  "name": "blue whale",
+  "scientificName": "balaenoptera musculus",
+  "species": "mammal",
+  "habitat": "oceans",
+  "description": "the largest known animal to have ever existed"
 }
 ```
-#### Response - The updated list of Students.
+#### Response - The updated list of Animals.
 
 ```
 [
   {
-    "studentId": 1,
-    "name": "Alice Smith",
-    "major": "CSC",
-    "gpa": 3.88
+    "animalId": 1,
+    "name": "bluejay",
+    "scientificName": "cyanocitta cristata",
+    "species": "bird",
+    "habitat": "forest",
+    "description": "a kind of bird"
   },
   {
-    "studentId": 2,
-    "name": "Bobby Stewart",
-    "major": "MAT",
-    "gpa": 2.97
+    "animalId": 2,
+    "name": "robin",
+    "scientificName": "turdus migratorius",
+    "species": "bird",
+    "habitat": "forest",
+    "description": "another kind of bird"
   },
   {
-    "studentId": 3,
-    "name": "Mister New Student",
-    "major": "CSC",
-    "gpa": 3.28
+    "animalId": 3,
+    "name": "meerkat",
+    "scientificName": "suricata suricatta",
+    "species": "mammal",
+    "habitat": "plains",
+    "description": "a moderately sized rodent that lives in large families"
+  },
+  {
+    "animalId": 5,
+    "name": "blue whale",
+    "scientificName": "balaenoptera musculus",
+    "species": "mammal",
+    "habitat": "oceans",
+    "description": "the largest known animal to have ever existed"
   }
 ]
 ```
 
-### [`/update/{studentId}`](http://localhost:8080/students/update/1) (PUT)
+### [`/update/{animalId}`](http://localhost:8080/animals/update/1) (PUT)
 Update an existing Student.
 
 #### Parameters
-- Path Variable: `studentId` &lt;integer&gt; - REQUIRED
+- Path Variable: `animalId` &lt;integer&gt; - REQUIRED
 
 #### Request Body
-A student object with the updates.
+An animal object with the updates.
 ```
 {
-  "name": "Mister Updated Student",
-  "major": "CSC",
-  "gpa": 3.45
+  "name": "robin 2",
+  "scientificName": "turdus migratorius",
+  "species": "bird",
+  "habitat": "forest",
+  "description": "another kind of bird"
 }
 ```
-#### Response - the updated Student object.
+#### Response - the updated Animal object.
 ```
 {
-  "studentId": 1,
-  "name": "Mister Updated Student",
-  "major": "CSC",
-  "gpa": 3.45
+  "animalId": 1,
+  "name": "robin 2",
+  "scientificName": "turdus migratorius",
+  "species": "bird",
+  "habitat": "forest",
+  "description": "another kind of bird"
 }
 ```
 
-### [`/delete/{studentId}`](http://localhost:8080/students/delete/1) (DELETE)
-Delete an existing Student.
+### [`/delete/{animalId}`](http://localhost:8080/animals/delete/1) (DELETE)
+Delete an existing Animal.
 
 #### Parameters
-- Path Variable: `studentId` &lt;integer&gt; - REQUIRED
+- Path Variable: `animalId` &lt;integer&gt; - REQUIRED
 
 #### Response - the updated list of Students.
 ```
 [
   {
-    "studentId": 2,
-    "name": "Bobby Stewart",
-    "major": "MAT",
-    "gpa": 2.97
+    "animalId": 2,
+    "name": "robin",
+    "scientificName": "turdus migratorius",
+    "species": "bird",
+    "habitat": "forest",
+    "description": "another kind of bird"
   },
-{
-    "studentId": 3,
-    "name": "Mister Updated Student",
-    "major": "CSC",
-    "gpa": 3.28
+  {
+    "animalId": 3,
+    "name": "meerkat",
+    "scientificName": "suricata suricatta",
+    "species": "mammal",
+    "habitat": "plains",
+    "description": "a moderately sized rodent that lives in large families"
+  },
+  {
+    "animalId": 5,
+    "name": "blue whale",
+    "scientificName": "balaenoptera musculus",
+    "species": "mammal",
+    "habitat": "oceans",
+    "description": "the largest known animal to have ever existed"
   }
 ]
 ```
